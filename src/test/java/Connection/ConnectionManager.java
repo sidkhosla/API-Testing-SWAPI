@@ -11,8 +11,6 @@ import java.util.Map;
 
 public class ConnectionManager {
 
-    private static final boolean Boy = false;
-    private static final Object IBIO = null;
     static HttpClient httpClient = HttpClient.newHttpClient();
     static HttpRequest httpRequest = HttpRequest.newBuilder()
             .uri(URI.create("https://swapi.dev/api/"))
@@ -81,6 +79,7 @@ public class ConnectionManager {
                 System.out.println("   \\            / /  /_\\  \\  |      /  \\   \\");
                 System.out.println("    \\    /\\    / /  _____  \\ |  |\\  \\---)   |");
                 System.out.println("     \\__/  \\__/ /__/     \\__\\|__| `._______/");
+                System.out.println("By Sidhant Khosla");
             }
         }
 
