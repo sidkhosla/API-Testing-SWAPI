@@ -1,10 +1,9 @@
 package DTOs;
 
 public class DTOFactory {
-    public static StarWarsDTO dtoFactory(String endPoint) {
-        int slash = endPoint.indexOf('/');
-        String input = endPoint.substring(0,slash);
-
+    public static StarWarsDTO dtoFactory(String url) {
+        String[] parts = url.split("/");
+        String input = parts[4];
         switch (input){
             case "films":
                 return new FilmsDTO();
@@ -20,14 +19,5 @@ public class DTOFactory {
                 return new VehiclesDTO();
         }
         return null;
-    }
-
-    public static void main(String[] args) {
-
-        System.out.println(DTOFactory.dtoFactory("people/1/"));
-        System.out.println(DTOFactory.dtoFactory("films/1/"));
-        System.out.println(DTOFactory.dtoFactory("starships/12/"));
-
-
     }
 }

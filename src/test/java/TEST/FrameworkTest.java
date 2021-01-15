@@ -3,7 +3,6 @@ package TEST;
 import Connection.ConnectionManager;
 import DTOs.*;
 import Injector.Injector;
-import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -19,17 +18,26 @@ public class FrameworkTest {
     static SpeciesDTO speciesDTO;
     static StarshipsDTO starshipsDTO;
     static VehiclesDTO vehiclesDTO;
-
-
     @BeforeAll
     @DisplayName("Setup")
     static void setup() {
-        filmsDTO = (FilmsDTO) Injector.injectDTO("https://swapi.dev/api/", "films/1/");
-        peopleDTO = (PeopleDTO) Injector.injectDTO("https://swapi.dev/api/","people/1/");
-        planetDTO = (PlanetDTO) Injector.injectDTO("https://swapi.dev/api/","planets/3/");
-        speciesDTO = (SpeciesDTO) Injector.injectDTO("https://swapi.dev/api/","species/3/");
-        starshipsDTO = (StarshipsDTO) Injector.injectDTO("https://swapi.dev/api/","starships/12/");
-        vehiclesDTO = (VehiclesDTO) Injector.injectDTO("https://swapi.dev/api/","vehicles/4/");
+        filmsDTO = (FilmsDTO) Injector.injectDTO(
+                ConnectionManager.getConnection("films/1/"));
+
+        peopleDTO = (PeopleDTO) Injector.injectDTO(
+                ConnectionManager.getConnection("people/1/"));
+
+        planetDTO = (PlanetDTO) Injector.injectDTO(
+                ConnectionManager.getConnection("planets/3/"));
+
+        speciesDTO = (SpeciesDTO) Injector.injectDTO(
+                ConnectionManager.getConnection("species/3/"));
+
+        starshipsDTO = (StarshipsDTO) Injector.injectDTO(
+                ConnectionManager.getConnection("starships/12/"));
+
+        vehiclesDTO = (VehiclesDTO) Injector.injectDTO(
+                ConnectionManager.getConnection("vehicles/4/"));
     }
 
     @Test
@@ -59,6 +67,11 @@ public class FrameworkTest {
         System.out.println(peopleDTO.getFilms().get(0));
         System.out.println(filmsDTO.getTitle());
         Assertions.assertEquals(peopleDTO.getFilms().get(0), filmsDTO.getUrl());
+    }
+    @Test
+    @DisplayName("get the film title for Luke")
+    void filmTitle(){
+        System.out.println(filmsDTO.getTitle());
     }
     @Test
     @DisplayName("how fast is the starship?")
