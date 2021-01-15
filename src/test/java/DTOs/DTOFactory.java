@@ -3,7 +3,7 @@ package DTOs;
 public class DTOFactory {
     public static StarWarsDTO dtoFactory(String endPoint) {
         int slash = endPoint.indexOf('/');
-        String input = endPoint.substring(0,endPoint.length()-3);
+        String input = endPoint.substring(0,slash);
 
         switch (input){
             case "films":
@@ -11,7 +11,7 @@ public class DTOFactory {
             case "people":
                 return new PeopleDTO();
             case "planets":
-//                return new PlanetDTO();
+                return new PlanetDTO();
             case "species":
                 return new SpeciesDTO();
             case "starships":
@@ -26,7 +26,7 @@ public class DTOFactory {
 
         System.out.println(DTOFactory.dtoFactory("people/1/"));
         System.out.println(DTOFactory.dtoFactory("films/1/"));
-        System.out.println(DTOFactory.dtoFactory("starships/1/"));
+        System.out.println(DTOFactory.dtoFactory("starships/12/"));
 
 
     }

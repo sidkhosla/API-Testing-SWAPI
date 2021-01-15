@@ -3,6 +3,7 @@ package TEST;
 import Connection.ConnectionManager;
 import DTOs.*;
 import Injector.Injector;
+import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -14,17 +15,20 @@ import java.util.List;
 public class FrameworkTest {
     static FilmsDTO filmsDTO;
     static PeopleDTO peopleDTO;
-//    static PlanetDTO planetDTO;
+    static PlanetDTO planetDTO;
     static SpeciesDTO speciesDTO;
     static StarshipsDTO starshipsDTO;
     static VehiclesDTO vehiclesDTO;
+
+
     @BeforeAll
     @DisplayName("Setup")
     static void setup() {
         filmsDTO = (FilmsDTO) Injector.injectDTO("https://swapi.dev/api/", "films/1/");
         peopleDTO = (PeopleDTO) Injector.injectDTO("https://swapi.dev/api/","people/1/");
+        planetDTO = (PlanetDTO) Injector.injectDTO("https://swapi.dev/api/","planets/3/");
         speciesDTO = (SpeciesDTO) Injector.injectDTO("https://swapi.dev/api/","species/3/");
-        starshipsDTO = (StarshipsDTO) Injector.injectDTO("https://swapi.dev/api/","starships/2/");
+        starshipsDTO = (StarshipsDTO) Injector.injectDTO("https://swapi.dev/api/","starships/12/");
         vehiclesDTO = (VehiclesDTO) Injector.injectDTO("https://swapi.dev/api/","vehicles/4/");
     }
 
@@ -51,19 +55,23 @@ public class FrameworkTest {
     @Test
     @DisplayName("get the film title for Luke")
     void GetFilmTitle(){
-        Assertions.assertEquals("Luke Skywalker", peopleDTO.getName());
+        System.out.println(peopleDTO.getName());
+        System.out.println(peopleDTO.getFilms().get(0));
+        System.out.println(filmsDTO.getTitle());
+        Assertions.assertEquals(peopleDTO.getFilms().get(0), filmsDTO.getUrl());
     }
     @Test
-    @DisplayName("CR-90-Corvette")
+    @DisplayName("how fast is the starship?")
     void speedOfTheStarship(){
-        Assertions.assertEquals("950", starshipsDTO.getMaxAtmospheringSpeed());
-//        System.out.println(starshipsDTO.getMaxAtmospheringSpeed());
+        System.out.println(starshipsDTO.getName());
+        System.out.println(starshipsDTO.getMaxAtmospheringSpeed());
+        Assertions.assertEquals("1050", starshipsDTO.getMaxAtmospheringSpeed());
+
     }
     @Test
     @DisplayName("can luke drive X-wing")
     void lukXWING(){
-        String key = "12";
-        Assertions.assertTrue(peopleDTO.getStarships().contains("http://swapi.dev/api/starships/" + key + "/"));
+        Assertions.assertTrue(peopleDTO.getStarships().contains(starshipsDTO.getUrl()));
     }
     @Test
     @DisplayName("Person get name")
