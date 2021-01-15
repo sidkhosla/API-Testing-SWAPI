@@ -19,6 +19,7 @@ public class FrameworkTest {
     static StarshipsDTO starshipsDTO;
     static VehiclesDTO vehiclesDTO;
 
+
     @BeforeAll
     @DisplayName("Setup")
     static void setup() {
@@ -39,6 +40,7 @@ public class FrameworkTest {
 
         vehiclesDTO = (VehiclesDTO) Injector.injectDTO(
                 ConnectionManager.getConnection("vehicles/4/"));
+        ConnectionManager.LaunchStarWars();
     }
 
     @Test
