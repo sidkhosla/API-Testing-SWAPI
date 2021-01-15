@@ -8,7 +8,7 @@
   <artifactId>SWAPI-API-TEST</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>SWAPI-API-TEST</name>
+  <name>SWAPI-API-FrameworkTest</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 

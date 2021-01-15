@@ -39,6 +39,22 @@ public class ConnectionManager {
         }
         return statusCode;
     }
+    public static int getStatusWithEndpoint(String endPoint){
+
+        HttpClient httpClient = HttpClient.newHttpClient();
+        HttpRequest httpRequest = HttpRequest.newBuilder().
+                uri(URI.create
+                        (BaseURL + endPoint)).build();
+        int statusCode = 0;
+        try {
+            HttpResponse<String> httpResponse = httpClient.send
+                    (httpRequest, HttpResponse.BodyHandlers.ofString());
+            statusCode = httpResponse.statusCode();
+        } catch(IOException | InterruptedException e){
+            e.printStackTrace();
+        }
+        return statusCode;
+    }
 
     public static List<String> getHeaders() throws IOException, InterruptedException {
         HttpResponse<String> httpResponse = httpClient.send

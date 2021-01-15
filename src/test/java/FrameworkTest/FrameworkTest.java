@@ -1,4 +1,4 @@
-package TEST;
+package FrameworkTest;
 
 import Connection.ConnectionManager;
 import DTOs.*;
@@ -18,6 +18,7 @@ public class FrameworkTest {
     static SpeciesDTO speciesDTO;
     static StarshipsDTO starshipsDTO;
     static VehiclesDTO vehiclesDTO;
+
     @BeforeAll
     @DisplayName("Setup")
     static void setup() {
@@ -45,21 +46,25 @@ public class FrameworkTest {
     void testResponseCode() {
         Assertions.assertEquals(200, ConnectionManager.getStatusCode());
     }
+
     @Test
     @DisplayName("What headers do we get?")
     void whatHeadersDoWeGet() throws IOException, InterruptedException {
         List<String> allValues = ConnectionManager.getHeaders();
     }
+
     @Test
     @DisplayName("Is Luke's height 172?")
     void LukeHeight(){
         Assertions.assertEquals("172", peopleDTO.getHeight());
     }
+
     @Test
     @DisplayName("Is Luke's name correct")
     void LukeNameCheck(){
         Assertions.assertEquals("Luke Skywalker", peopleDTO.getName());
     }
+
     @Test
     @DisplayName("get the film title for Luke")
     void GetFilmTitle(){
@@ -68,27 +73,31 @@ public class FrameworkTest {
         System.out.println(filmsDTO.getTitle());
         Assertions.assertEquals(peopleDTO.getFilms().get(0), filmsDTO.getUrl());
     }
+
     @Test
     @DisplayName("get the film title for Luke")
     void filmTitle(){
         System.out.println(filmsDTO.getTitle());
     }
+
     @Test
     @DisplayName("how fast is the starship?")
     void speedOfTheStarship(){
         System.out.println(starshipsDTO.getName());
         System.out.println(starshipsDTO.getMaxAtmospheringSpeed());
         Assertions.assertEquals("1050", starshipsDTO.getMaxAtmospheringSpeed());
-
     }
+
     @Test
     @DisplayName("can luke drive X-wing")
     void lukXWING(){
         Assertions.assertTrue(peopleDTO.getStarships().contains(starshipsDTO.getUrl()));
     }
+
     @Test
     @DisplayName("Person get name")
     void getName() {
         Assertions.assertEquals("Luke Skywalker", peopleDTO.getName());
     }
+
 }
