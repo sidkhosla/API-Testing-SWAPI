@@ -42,12 +42,6 @@ public class FrameworkTest {
     }
 
     @Test
-    @DisplayName("Test response code")
-    void testResponseCode() {
-        Assertions.assertEquals(200, ConnectionManager.getStatusCode());
-    }
-
-    @Test
     @DisplayName("What headers do we get?")
     void whatHeadersDoWeGet() throws IOException, InterruptedException {
         List<String> allValues = ConnectionManager.getHeaders();
@@ -98,6 +92,18 @@ public class FrameworkTest {
     @DisplayName("Person get name")
     void getName() {
         Assertions.assertEquals("Luke Skywalker", peopleDTO.getName());
+    }
+
+    @Test
+    @DisplayName("Test response code")
+    void testResponseCode() {
+        Assertions.assertEquals(200, ConnectionManager.getStatusCode());
+    }
+
+    @Test
+    @DisplayName("check status code for a specific page")
+    void getStatusWithEndpoint() {
+        Assertions.assertEquals(200, ConnectionManager.getStatusWithEndpoint("vehicles/4/"));
     }
 
 }
